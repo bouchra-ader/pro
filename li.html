@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>[Nom du site] – prototype (V1 et V2)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap">
+<style>
+:root{--bg:#e9e7e1;--ph:#fbfaf6;--ink:#1d1d1b;--mute:#6b6a64;--line:#bdbab0;--tile:#f1efe8;--hi:#dfe8f1;--grey:#d9d7d0;--ok:#dcebdc;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151514;--ph:#232321;--ink:#efede6;--mute:#a4a299;--line:#4d4b45;--tile:#2d2c29;--hi:#283544;--grey:#3a3935;--ok:#243a26;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#151514;--ph:#232321;--ink:#efede6;--mute:#a4a299;--line:#4d4b45;--tile:#2d2c29;--hi:#283544;--grey:#3a3935;--ok:#243a26;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.3 "Patrick Hand","Comic Sans MS","Segoe Print",cursive;display:flex;flex-direction:column;align-items:center;padding:14px 10px}
+.phone{width:100%;max-width:380px;min-height:650px;background:var(--ph);border:2.5px solid var(--ink);border-radius:18px;display:flex;flex-direction:column;overflow:hidden;position:relative}
+.screen{display:none;flex-direction:column;flex:1}.screen.on{display:flex}
+.top{display:flex;align-items:center;gap:10px;padding:14px 14px 10px;border-bottom:1.5px solid var(--line)}
+.top h1{margin:0;font-size:22px;font-weight:normal;flex:1}.top.c h1{text-align:center;padding-right:28px}
+.body{padding:12px 14px;display:flex;flex-direction:column;gap:12px;flex:1}
+button,input,select,textarea{font:inherit;color:var(--ink)}button{cursor:pointer}
+input,select,textarea{width:100%;border:2px solid var(--ink);border-radius:10px;background:var(--ph);padding:9px 12px}
+.banner{border:2px solid var(--ink);border-radius:8px;padding:14px;font-size:20px;text-align:right;background:var(--tile)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{border:2px solid var(--ink);border-radius:10px;background:var(--tile);padding:14px 6px;text-align:center;font-size:19px;min-height:74px}
+.tile.hi{background:var(--hi)}
+.row{display:flex;gap:10px}
+.book{flex:1;border:1.5px solid var(--line);border-radius:6px;padding:6px;font-size:15px;background:var(--tile)}
+.cov{height:54px;border:1.5px solid var(--ink);margin-bottom:4px}
+.nav{display:flex;border-top:1.5px solid var(--line);margin-top:auto}
+.nav button{flex:1;border:0;background:none;padding:8px 2px;font-size:14px;position:relative}
+.nav .on{font-weight:bold;text-decoration:underline}
+.badge{position:absolute;top:2px;right:14%;background:#c0392b;color:#fff;border-radius:10px;font-size:11px;padding:0 5px;display:none}
+.back{border:0;background:none;font-size:26px;padding:0 4px}
+label{display:block;font-size:18px;margin-bottom:3px}.req,.mute{color:var(--mute)}
+.btn{border:2px solid var(--ink);border-radius:10px;padding:11px;background:var(--grey);text-align:center;font-size:19px;width:100%}
+.btn.ok{background:var(--hi)}.btn:disabled{opacity:.55;cursor:not-allowed}
+.line{display:flex;justify-content:space-between;padding:2px}
+.total{background:var(--hi);padding:6px 8px;border-radius:6px}
+.info{border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font-size:16px}
+.help{font-size:15px;color:var(--mute);margin-top:3px}
+ol{margin:4px 0 0;padding-left:22px;font-size:16px}
+.card{border:2px solid var(--ink);border-radius:10px;padding:10px;background:var(--tile);display:flex;gap:10px;align-items:center}
+.pill{display:inline-block;border:1.5px solid var(--ink);border-radius:14px;padding:0 10px;font-size:14px;background:var(--ok)}
+.notif{position:absolute;top:8px;left:8px;right:8px;background:var(--ink);color:var(--ph);border-radius:10px;padding:10px 12px;font-size:16px;display:none;z-index:4;text-align:left;border:0;width:calc(100% - 16px)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:var(--ph);padding:9px 16px;border-radius:20px;font-size:16px;display:none;z-index:5}
+.nav2{margin-top:12px;font:13px sans-serif;color:var(--mute);text-align:center;max-width:380px}
+.nav2 button{border:1px solid var(--line);background:none;border-radius:6px;padding:4px 8px;margin:2px;font:13px sans-serif;color:var(--mute)}
+.nav2 .cur{background:var(--ink);color:var(--ph)}
+.land{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;padding:28px 22px}
+.land h1{font-size:32px;font-weight:normal;margin:0;line-height:1.15}
+.stack{position:relative;width:150px;height:120px;margin:6px 0}
+.stack i{position:absolute;left:0;right:0;height:34px;border:2.5px solid var(--ink);border-radius:5px;background:var(--tile)}
+.stack i:nth-child(1){bottom:0}.stack i:nth-child(2){bottom:34px;left:14px;right:-8px;background:var(--hi)}.stack i:nth-child(3){bottom:68px;left:4px;right:6px}
+.link{border:0;background:none;text-decoration:underline;color:var(--mute);font-size:16px}
+</style>
+</head>
+<body>
+<div class="phone" id="phone">
+<button class="notif" id="notif" onclick="go('s5')">🔔 Nouvelle offre pour votre annonce</button>
+
+<!-- Landing page -->
+<section class="screen on" id="s0">
+  <div class="land">
+    <div style="font-size:22px">📖 [Nom du site]</div>
+    <div class="stack" aria-hidden="true"><i></i><i></i><i></i></div>
+    <h1>Lisez plus,<br>dépensez moins.</h1>
+    <p class="mute" style="margin:0">Achetez, vendez, louez ou échangez vos livres d’occasion entre lecteurs.</p>
+    <button class="btn ok" onclick="home()">Commencer</button>
+    <button class="link" onclick="na()">J’ai déjà un compte</button>
+  </div>
+</section>
+
+<!-- Accueil V1 -->
+<section class="screen" id="s1a">
+  <div class="top"><span aria-hidden="true">📖</span><h1>[Nom du site]</h1><span aria-hidden="true">👤</span></div>
+  <div class="body">
+    <input placeholder="Rechercher un livre, un auteur…" aria-label="Rechercher" onfocus="na()">
+    <div class="banner">Donne une seconde vie<br>à tes livres !</div>
+    <div class="grid">
+      <button class="tile" onclick="na()">🛒<br>Acheter</button>
+      <button class="tile" onclick="na()">🕒<br>Louer</button>
+      <button class="tile" onclick="na()">🔁<br>Échanger</button>
+      <button class="tile hi" onclick="go('s2')">⊕<br>Vendre un livre</button>
+    </div>
+    <div class="line"><span>Livres populaires</span><span class="mute">Voir tout ›</span></div>
+    <div class="row">
+      <button class="book" onclick="na()"><div class="cov"></div>L’Étranger<br>8,00 €</button>
+      <button class="book" onclick="na()"><div class="cov"></div>Les Misérables<br>7,50 €</button>
+      <button class="book" onclick="na()"><div class="cov"></div>Le Petit Prince<br>6,00 €</button>
+    </div>
+  </div>
+</section>
+
+<!-- Accueil V2 : choix visibles dès le début -->
+<section class="screen" id="s1b">
+  <div class="top"><span aria-hidden="true">📖</span><h1>[Nom du site]</h1><span aria-hidden="true">👤</span></div>
+  <div class="body">
+    <input placeholder="Rechercher un livre, un auteur…" aria-label="Rechercher" onfocus="na()">
+    <div style="font-size:22px">Que voulez-vous faire ?</div>
+    <div class="grid">
+      <button class="tile" onclick="na()">🛒<br>Acheter un livre</button>
+      <button class="tile" onclick="na()">🕒<br>Louer un livre</button>
+      <button class="tile" onclick="na()">🔁<br>Échanger un livre</button>
+      <button class="tile hi" onclick="go('s2')">⊕<br>Vendre un livre<br><span style="font-size:14px">et gagner de l’argent</span></button>
+    </div>
+    <div class="line"><span>Livres populaires</span><span class="mute">Voir tout ›</span></div>
+    <div class="row">
+      <button class="book" onclick="na()"><div class="cov"></div>L’Étranger<br>8,00 €</button>
+      <button class="book" onclick="na()"><div class="cov"></div>Les Misérables<br>7,50 €</button>
+      <button class="book" onclick="na()"><div class="cov"></div>Le Petit Prince<br>6,00 €</button>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="s2">
+  <div class="top c"><button class="back" onclick="home()" aria-label="Retour">←</button><h1>Vendre un livre</h1></div>
+  <div class="body">
+    <div class="row" style="align-items:center"><div class="cov" style="width:80px;height:80px;flex:none;margin:0;display:flex;align-items:center;justify-content:center">🖼</div><div>Ajouter une photo<br>(de votre livre)<br><button class="tile" style="padding:4px 10px;min-height:0;font-size:16px;margin-top:4px" onclick="na()">Choisir une image</button></div></div>
+    <div><label for="t">Titre du livre <span class="req">*</span></label><input id="t" placeholder="Ex : L’Étranger" oninput="chk()"></div>
+    <div><label for="c">Catégorie <span class="req">*</span></label><select id="c" onchange="chk()"><option value="">Sélectionner une catégorie</option><option>Roman</option><option>Manga</option><option>BD</option></select></div>
+    <div><label for="e">État du livre <span class="req">*</span></label><select id="e" onchange="chk()"><option value="">Sélectionner l’état</option><option>Neuf</option><option>Très bon état</option><option>Bon état</option><option>État correct</option></select></div>
+    <div><label for="p">Prix souhaité <span class="req">*</span></label><input id="p" inputmode="decimal" placeholder="Ex : 10,00 €" oninput="chk()"><div class="help" id="ph" style="display:none"></div></div>
+    <div><label for="d">Description (optionnel)</label><textarea id="d" rows="2" placeholder="Décrivez votre livre, son état, …"></textarea></div>
+    <button class="btn" id="go2" disabled onclick="recap()">Continuer</button>
+  </div>
+</section>
+
+<section class="screen" id="s3">
+  <div class="top c"><button class="back" onclick="go('s2')" aria-label="Retour">←</button><h1>Récapitulatif de votre annonce</h1></div>
+  <div class="body">
+    <div class="row" style="align-items:center"><div class="cov" style="width:56px;height:72px;flex:none;margin:0"></div><div><span id="rt" style="font-size:20px">L’Étranger</span><br><span id="rm" class="mute">Roman · Bon état</span></div></div>
+    <div>
+      <div class="line"><span>Prix de vente</span><span id="rp">10,00 €</span></div>
+      <div class="line"><span>Commission de la plateforme (10 %)</span><span id="rc">1,00 €</span></div>
+      <div class="line total"><span>Montant estimé pour le vendeur</span><span id="rv">9,00 €</span></div>
+    </div>
+    <div class="info">ⓘ Le paiement est sécurisé et sera effectué une fois le livre vendu.</div>
+    <div>Comment ça marche ?
+      <ol><li>Votre annonce est publiée sur la plateforme.</li><li>Un acheteur vous contacte.</li><li>Vous validez la vente et l’acheteur paie.</li><li>Vous recevez votre argent sous 3 à 5 jours.</li></ol>
+    </div>
+    <button class="btn ok" style="margin-top:auto" onclick="publish()">Publier mon annonce</button>
+  </div>
+</section>
+
+<!-- Mes annonces -->
+<section class="screen" id="s4">
+  <div class="top c"><h1>Mes annonces</h1></div>
+  <div class="body">
+    <div class="info" style="background:var(--ok)">✓ Votre annonce est publiée.</div>
+    <div class="card"><div class="cov" style="width:50px;height:68px;flex:none;margin:0"></div><div style="flex:1"><span id="at" style="font-size:20px">L’Étranger</span><br><span id="am" class="mute">Roman · Bon état</span><br><span id="ap">10,00 €</span> <span class="pill">En ligne</span></div></div>
+    <div class="mute" id="anone" style="display:none">Vous n’avez pas encore d’annonce.</div>
+    <div class="help">Vous serez prévenu(e) ici et dans « Messages » quand un acheteur est intéressé.</div>
+  </div>
+</section>
+
+<!-- Messages -->
+<section class="screen" id="s5">
+  <div class="top c"><h1>Messages</h1></div>
+  <div class="body" id="msgbody"></div>
+</section>
+
+<div class="nav" id="nav">
+  <button id="n1" onclick="home()">Accueil</button>
+  <button onclick="na()">Recherche</button>
+  <button id="n3" onclick="go('s2')">Ajouter</button>
+  <button id="n4" onclick="go('s5')">Messages<span class="badge" id="badge">1</span></button>
+  <button id="n5" onclick="go('s4')">Profil</button>
+</div>
+</div>
+
+<div class="toast" id="toast" role="status">Cette partie n’est pas disponible dans le test</div>
+<div class="nav2" id="nav2">Version : <button id="bv1" onclick="setv(1)">V1</button><button id="bv2" onclick="setv(2)">V2</button><br>Animateur : <button onclick="home()">Accueil</button><button onclick="go('s2')">Formulaire</button><button onclick="recap(1)">Récapitulatif</button><button onclick="go('s4')">Mes annonces</button><button onclick="offer()">Simuler une offre d’achat</button><button onclick="reset()">Tout remettre à zéro</button></div>
+
+<script>
+var v=location.hash==='#v2'?2:1,ann=null,hasOffer=false,done=false;
+function show(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on')});document.getElementById(id).classList.add('on');window.scrollTo(0,0)}
+function go(id){
+  show(id);
+  document.getElementById('nav').style.display=(id==='s0'||id==='s2'||id==='s3')?'none':'flex';
+  ['n1','n3','n4','n5'].forEach(function(n){document.getElementById(n).classList.remove('on')});
+  var m={s1a:'n1',s1b:'n1',s4:'n5',s5:'n4'};if(m[id])document.getElementById(m[id]).classList.add('on');
+  if(id==='s5'){renderMsg();document.getElementById('badge').style.display='none';document.getElementById('notif').style.display='none'}
+  if(id==='s4')renderAnn();
+}
+function home(){go(v===2?'s1b':'s1a')}
+function na(){var t=document.getElementById('toast');t.style.display='block';clearTimeout(window._t);window._t=setTimeout(function(){t.style.display='none'},1800)}
+function setv(n){v=n;history.replaceState(null,'',n===2?'#v2':'#v1');applyv();home()}
+function applyv(){
+  document.getElementById('n3').textContent='Vendre';
+  document.getElementById('bv1').className=v===1?'cur':'';document.getElementById('bv2').className=v===2?'cur':'';
+  document.getElementById('ph').style.display=v===2?'block':'none';updHelp();
+}
+function chk(){var ok=['t','c','e','p'].every(function(i){return document.getElementById(i).value.trim()});var b=document.getElementById('go2');b.disabled=!ok;b.classList.toggle('ok',ok);updHelp()}
+function num(){var r=document.getElementById('p').value.replace(',','.').replace(/[^0-9.]/g,'');return parseFloat(r)}
+function fmt(n){return n.toFixed(2).replace('.',',')+' €'}
+function updHelp(){var x=num(),h=document.getElementById('ph');h.textContent=x>0?('Vous recevrez '+fmt(x*0.9)+' (commission de 10 % : '+fmt(x*0.1)+')'):'Une commission de 10 % est retirée du prix de vente.'}
+function recap(force){
+  var x=num();if(!(x>0)){if(force){x=10}else{na();return}}
+  var t=document.getElementById('t').value.trim()||'L’Étranger',c=document.getElementById('c').value||'Roman',e=document.getElementById('e').value||'Bon état';
+  ann={t:t,m:c+' · '+e,p:x};
+  document.getElementById('rt').textContent=t;document.getElementById('rm').textContent=ann.m;
+  document.getElementById('rp').textContent=fmt(x);document.getElementById('rc').textContent=fmt(x*0.1);document.getElementById('rv').textContent=fmt(x*0.9);
+  go('s3');
+}
+function publish(){if(!ann)recap(1);done=true;go('s4')}
+function renderAnn(){
+  var has=done&&ann;
+  document.querySelector('#s4 .card').style.display=has?'flex':'none';document.querySelector('#s4 .info').style.display=has?'block':'none';
+  document.getElementById('anone').style.display=has?'none':'block';
+  if(has){document.getElementById('at').textContent=ann.t;document.getElementById('am').textContent=ann.m;document.getElementById('ap').textContent=fmt(ann.p)}
+}
+function offer(){
+  if(!(done&&ann)){na();return}
+  hasOffer=true;var n=document.getElementById('notif');
+  n.textContent='🔔 Karim est intéressé par « '+ann.t+' »';n.style.display='block';
+  document.getElementById('badge').style.display='inline-block';
+  setTimeout(function(){n.style.display='none'},6000);
+}
+function renderMsg(){
+  var b=document.getElementById('msgbody');
+  if(!hasOffer){b.innerHTML='<div class="mute">Aucun message pour le moment.</div>';return}
+  if(window._accepted){b.innerHTML='<div class="info" style="background:var(--ok)">✓ Vente validée avec Karim.</div><div class="info">Karim a payé. Votre argent (<b>'+fmt(ann.p*0.9)+'</b>) sera versé sous 3 à 5 jours.</div>';return}
+  b.innerHTML='<div class="card" style="flex-direction:column;align-items:stretch"><div><b>Karim</b> · à l’instant</div><div>Bonjour, votre livre « '+ann.t+' » m’intéresse. Je vous propose '+fmt(ann.p)+'.</div><div class="row"><button class="btn ok" onclick="accept()">Accepter</button><button class="btn" onclick="refuse()">Refuser</button></div></div>';
+}
+function accept(){window._accepted=true;renderMsg()}
+function refuse(){hasOffer=false;renderMsg()}
+function reset(){ann=null;hasOffer=false;done=false;window._accepted=false;['t','p','d'].forEach(function(i){document.getElementById(i).value=''});['c','e'].forEach(function(i){document.getElementById(i).selectedIndex=0});chk();document.getElementById('badge').style.display='none';document.getElementById('notif').style.display='none';go('s0')}
+applyv();go('s0');
+</script>
+</body>
+</html>
